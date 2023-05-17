@@ -24,7 +24,6 @@ int izbornik() {
 		printf("\t3. Uredi postojecu biljesku\n\n");
 		printf("\t4. Prikaz biljeska\n\n");
 		printf("\t5. Pronadji biljesku\n\n");
-		//printf("\t6. Prikazi kalendar\n\n");
 		printf("\t6.. Izbrisi sve biljeske\n\n");
 
 		printf("\t7. Izadji iz programa\n\n");
