@@ -13,9 +13,9 @@ int izbornik() {
 
 	do {
 
-		int broj = BrojacDat();
-		//int StatBr = StatDat();
-		static OBAVEZE* PoljeObaveza = NULL;
+		int broj = BrojacDat(); //4
+		int StatBr = StatDat();
+		static OBAVEZE* PoljeObaveza = NULL; //9
 		PoljeObaveza = zauzimanje(broj);
 		UnosPolje(PoljeObaveza, broj);
 
@@ -54,11 +54,11 @@ int izbornik() {
 		case 6:
 			IzbrisiDatoteku();
 			break;
-			
+
 		case 7:
 			system("cls");
 			printf("\tIzlazenje iz programa!\n\n\n");
-			free(PoljeObaveza);
+			free(PoljeObaveza); //14
 			exit(0);
 
 		default:
@@ -77,26 +77,26 @@ void stvori_datoteku() {
 	mapa = fopen(datoteka, "a");
 
 	if (mapa == NULL) {
-		perror("Problem: ");
+		perror("Problem: "); //19
 		exit(EXIT_FAILURE);
 	}
 	fclose(mapa);
-	/*
+	
 	FILE* mapa2 = NULL;
 	mapa2 = fopen("br.txt", "a");
-	
+
 	if (mapa2 == NULL) {
-		perror("Problem: ");
+		perror("Problem: "); //19
 		exit(EXIT_FAILURE);
 	}
-	fclose(mapa2);
-	*/
+	fclose(mapa2); //16
+	
 	FILE* mapa3 = NULL;
 	mapa3 = fopen("statistika.txt", "a");
-	
+
 
 	if (mapa3 == NULL) {
-		perror("Problem: ");
+		perror("Problem: "); //19
 		exit(EXIT_FAILURE);
 	}
 	fclose(mapa3);
@@ -109,22 +109,22 @@ int BrojacDat() {
 
 	Brf = fopen("br.txt", "r+");
 	if (Brf == NULL) {
-		perror("Problem kod stvaranje datoteke za brojac");
+		perror("Problem kod stvaranje datoteke za brojac"); //19
 	}
 
 
 	fscanf(Brf, "%d", &br);
-	fclose(Brf);
+	fclose(Brf); //16
 	return br;
 }
-/*
+
 int StatDat() {
 	int br = 0;
 	FILE* Brf = NULL;
 
 	Brf = fopen("statistika.txt", "r+");
 	if (Brf == NULL) {
-		perror("Problem kod otvaranja datoteke za statistiku");
+		perror("Problem kod otvaranja datoteke za statistiku"); //19
 	}
 
 
@@ -132,7 +132,7 @@ int StatDat() {
 	fclose(Brf);
 	return br;
 }
-*/
+
 void dodaj() {
 	system("cls");
 
@@ -140,7 +140,7 @@ void dodaj() {
 	fp = fopen(datoteka, "a");
 
 	if (fp == NULL) {
-		perror("dodavanje obaveza error");
+		perror("dodavanje obaveza error"); //19
 		exit(EXIT_FAILURE);
 
 	}
@@ -155,9 +155,9 @@ void dodaj() {
 	FILE* x = NULL;
 	x = fopen("br.txt", "r+");
 	if (x == NULL) {
-		perror("Zapisivanje u br.txt error");
+		perror("Zapisivanje u br.txt error"); //19
 	}
-	rewind(x);
+	rewind(x); //17
 	fprintf(x, "%d", BrObaveze);
 	fclose(x);
 
@@ -182,7 +182,7 @@ void prikaz() {
 	fp = fopen(datoteka, "r");
 
 	if (fp == NULL) {
-		perror("citanje biljeska error");
+		perror("citanje biljeska error");  //19
 	}
 
 
@@ -196,8 +196,8 @@ void prikaz() {
 			c = fgetc(fp);
 		}
 
-		fseek(fp, 0, SEEK_END);
-		int size = ftell(fp);
+		fseek(fp, 0, SEEK_END); //17
+		int size = ftell(fp); //17
 		if (size == 0) {
 			printf("\nNema unesenih biljeska! Probajte upisati novu biljesku..");
 		}
@@ -234,14 +234,14 @@ void IzbrisiDatoteku() {
 		}
 		fprintf(x, "%d", 0);
 		fclose(x);
-		/*
+		
 		FILE* y = NULL;
 		y = fopen("statistika.txt", "w");
 		if (y == NULL) {
-			perror("Brisanje statistike");
+			perror("Brisanje statistike"); //19
 		}
 		fclose(y);
-		*/
+		
 	}
 	system("cls");
 }
@@ -250,7 +250,7 @@ void IzbrisiDatoteku() {
 
 OBAVEZE* zauzimanje(int broj) {
 	OBAVEZE* polje = NULL;
-	polje = (OBAVEZE*)calloc(broj, sizeof(OBAVEZE));
+	polje = (OBAVEZE*)calloc(broj, sizeof(OBAVEZE)); //14
 	if (polje == NULL) {
 		return NULL;
 		perror("Zauzimanje polja");
@@ -309,8 +309,8 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 				c = fgetc(pp);
 			}
 
-			fseek(pp, 0, SEEK_END);
-			int size = ftell(pp);
+			fseek(pp, 0, SEEK_END); //17
+			int size = ftell(pp); //17
 			if (size == 0) {
 				printf("\nNema unesenih obaveza! Probajte upisati koju obavezu..");
 			}
@@ -327,7 +327,7 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 						printf("\nNe postoji biljeska pod tim brojem!");
 					}
 				} while (num > broj || num <= 0);
-				/*
+				
 				char zaStat;
 				int noviBrojac = StatDat();
 				printf("\nJeste li odradili vasu biljesku? y/n: ");
@@ -337,7 +337,7 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 					FILE* stat = NULL;
 					stat = fopen("statistika.txt", "r+");
 					if (stat == NULL) {
-						perror("Problem kod statistike datoteke");
+						perror("Problem kod statistike datoteke"); //19
 					}
 					noviBrojac++;
 					rewind(stat);
@@ -346,7 +346,7 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 				}
 
 				printf("\n");
-				*/
+				
 
 
 				for (i = num - 1; i < broj - 1; i++) {
@@ -446,68 +446,8 @@ void UrediObavezu(OBAVEZE* p, int broj) {
 	}
 	system("cls");
 }
-/*
-void kalendar() {
-	system("cls");
-	int godina, dan, mj;
-	int dani_u_mjesecu[] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-	char* mjeseci[] =
-	{
-		" ",
-		"\n\n\nSijecanj",
-		"\n\n\nVeljaca",
-		"\n\n\nOzujak",
-		"\n\n\nTravanj",
-		"\n\n\nSvibanj",
-		"\n\n\nLipanj",
-		"\n\n\nSrpanj",
-		"\n\n\nKolovoz",
-		"\n\n\nRujan",
-		"\n\n\nListopad",
-		"\n\n\nStudeni",
-		"\n\n\nProsinac"
-	};
 
 
-	do {
-		printf("\nUnos godine: ");
-		scanf("%d", &godina);
-	} while (godina <= 0);
-
-
-	int PrviDan;
-	PrviDan = ((godina + (godina - 1) / 4 - (godina - 1) / 100 + (godina - 1) / 400) % 7);
-
-	if (godina % 4 == 0 && godina % 100 != 0 || godina % 400 == 0) {
-		dani_u_mjesecu[2] = 29;
-	}
-
-
-	for (mj = 1; mj <= 12; mj++) {
-		printf("%s", mjeseci[mj]);
-		printf("\n\nPon  Uto  Sri  Cet  Pet  Sub  Ned\n");
-
-		for (dan = 1; dan <= 1 + PrviDan * 5; dan++) {
-			printf(" ");
-		}
-
-		for (dan = 1; dan <= dani_u_mjesecu[mj]; dan++) {
-			printf("%2d", dan);
-
-			if ((dan + PrviDan) % 7 > 0)
-				printf("   ");
-			else
-				printf("\n ");
-
-		}
-		PrviDan = (PrviDan + dani_u_mjesecu[mj]) % 7;
-	}
-
-	printf("\n\n");
-	system("pause");
-	system("cls");
-}*/
-/*
 void statistika(int stat, int broj) {
 	system("cls");
 	if (broj == 0) {
@@ -520,7 +460,7 @@ void statistika(int stat, int broj) {
 	system("pause");
 	system("cls");
 }
-*/
+
 
 void pronadji(OBAVEZE* p, int broj) {
 	system("cls");
