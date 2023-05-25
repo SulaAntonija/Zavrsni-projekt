@@ -1,12 +1,13 @@
 #ifndef FUNKCIJE_H
 #define FUNKCIJE_H
+//6 organizacija izvornog koda
 
-typedef struct obaveze {
+typedef struct obaveze {   //3
 	int br;
 	char obaveza[200];
 }OBAVEZE;
 
-static char* datoteka = "to do list.txt";
+static char* datoteka = "biljeske.txt";  //5
 int BrObaveze;
 
 void naslov();

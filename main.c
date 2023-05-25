@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "funkcije.h"
+//6 organizacija izvornog koda
 
 int main(void) {
 

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "funkcije.h"
+//6 organizacija izvornog koda
 
 void naslov() {
 	printf("\t** BILJESKE **\n\n");
@@ -15,11 +16,11 @@ int izbornik() {
 
 		int broj = BrojacDat(); //4
 		int StatBr = StatDat();
-		static OBAVEZE* PoljeObaveza = NULL; //9
+		static OBAVEZE* PoljeObaveza = NULL; //9  //5
 		PoljeObaveza = zauzimanje(broj);
 		UnosPolje(PoljeObaveza, broj);
 
-		printf("\n\t1. Dodaj biljesku\n\n");
+		printf("\n\t1. Dodaj biljesku\n\n");  //8
 		printf("\t2. Izbrisi biljesku\n\n");
 		printf("\t3. Uredi postojecu biljesku\n\n");
 		printf("\t4. Prikaz biljeska\n\n");
@@ -81,7 +82,7 @@ void stvori_datoteku() {
 		exit(EXIT_FAILURE);
 	}
 	fclose(mapa);
-	
+
 	FILE* mapa2 = NULL;
 	mapa2 = fopen("br.txt", "a");
 
@@ -90,7 +91,7 @@ void stvori_datoteku() {
 		exit(EXIT_FAILURE);
 	}
 	fclose(mapa2); //16
-	
+
 	FILE* mapa3 = NULL;
 	mapa3 = fopen("statistika.txt", "a");
 
@@ -212,12 +213,12 @@ void prikaz() {
 void IzbrisiDatoteku() {
 	char YesNo;
 	do {
-		printf("\nJeste li sigurni da zelite izbrisati postojecu biljesku, te stvoriti novu? da/ne: ");
+		printf("\nJeste li sigurni da zelite izbrisati postojecu listu, te stvoriti novu? y/n: ");
 		scanf(" %c", &YesNo);
-	} while (YesNo != 'ne' && YesNo != 'Ne' && YesNo != 'da' && YesNo != 'Da');
+	} while (YesNo != 'n' && YesNo != 'N' && YesNo != 'y' && YesNo != 'Y');
 
 
-	if (YesNo == 'da' || YesNo == 'Da') {
+	if (YesNo == 'y' || YesNo == 'Y') {
 		FILE* fp = NULL;
 		fp = fopen(datoteka, "w");
 
@@ -234,14 +235,13 @@ void IzbrisiDatoteku() {
 		}
 		fprintf(x, "%d", 0);
 		fclose(x);
-		
+
 		FILE* y = NULL;
 		y = fopen("statistika.txt", "w");
 		if (y == NULL) {
-			perror("Brisanje statistike"); //19
+			perror("Brisanje statistike");
 		}
 		fclose(y);
-		
 	}
 	system("cls");
 }
@@ -288,12 +288,12 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 	system("cls");
 
 	do {
-		printf("\nJeste li sigurni da zelite izbrisati biljesku, pritisnite n za povratak! da/ne: ");
+		printf("\nJeste li sigurni da zelite izbrisati obavezu, pritisnite n za povratak! y/n: ");
 		scanf(" %c", &YesNo);
-	} while (YesNo != 'ne' && YesNo != 'Ne' && YesNo != 'da' && YesNo != 'Da');
+	} while (YesNo != 'n' && YesNo != 'N' && YesNo != 'y' && YesNo != 'Y');
 
 
-	if (YesNo == 'da' || YesNo == 'Da') {
+	if (YesNo == 'y' || YesNo == 'Y') {
 		system("cls");
 		FILE* pp = NULL;
 		pp = fopen(datoteka, "r");
@@ -309,8 +309,8 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 				c = fgetc(pp);
 			}
 
-			fseek(pp, 0, SEEK_END); //17
-			int size = ftell(pp); //17
+			fseek(pp, 0, SEEK_END);
+			int size = ftell(pp);
 			if (size == 0) {
 				printf("\nNema unesenih obaveza! Probajte upisati koju obavezu..");
 			}
@@ -320,24 +320,24 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 			if (size != 0) {
 				do {
 
-					printf("\nUnesite broj biljeske koji zelite izbrisati: ");
+					printf("\nUnesite broj obaveze koji zelite izbrisati: ");
 					scanf("%d", &num);
 
 					if (num > broj || num <= 0) {
-						printf("\nNe postoji biljeska pod tim brojem!");
+						printf("\nNe postoji obaveza pod tim brojem!");
 					}
 				} while (num > broj || num <= 0);
-				
+
 				char zaStat;
 				int noviBrojac = StatDat();
-				printf("\nJeste li odradili vasu biljesku? y/n: ");
+				printf("\nJeste li odradili vasu obavezu? y/n: ");
 				scanf(" %c", &zaStat);
 
 				if (zaStat == 'y' || zaStat == 'Y') {
 					FILE* stat = NULL;
 					stat = fopen("statistika.txt", "r+");
 					if (stat == NULL) {
-						perror("Problem kod statistike datoteke"); //19
+						perror("Problem kod statistike datoteke");
 					}
 					noviBrojac++;
 					rewind(stat);
@@ -346,7 +346,6 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 				}
 
 				printf("\n");
-				
 
 
 				for (i = num - 1; i < broj - 1; i++) {
@@ -423,7 +422,7 @@ void UrediObavezu(OBAVEZE* p, int broj) {
 			strcpy((p + ObavezaBr)->obaveza, NovaObaveza);
 
 			int i;
-			FILE* np = NULL;
+			FILE* np = NULL; //9
 			np = fopen(datoteka, "w+");
 			if (np == NULL) {
 				exit(EXIT_FAILURE);
