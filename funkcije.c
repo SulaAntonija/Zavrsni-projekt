@@ -422,10 +422,11 @@ void pronadji(OBAVEZE* p, int broj) {
 	system("cls");
 }
 
-int SortirajBiljeske(const void* a, const void* b) {
+int SortirajBiljeske(const void* a, const void* b) {   //20
 	const OBAVEZE* biljeskaA = (const OBAVEZE*)a;
 	const OBAVEZE* biljeskaB = (const OBAVEZE*)b;
 
 	return strcmp(biljeskaA->obaveza, biljeskaB->obaveza);
+
 
 }
