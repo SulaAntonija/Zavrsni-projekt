@@ -15,7 +15,7 @@ int izbornik() {
 	do {
 
 		int broj = BrojacDat(); //4
-	
+
 		static OBAVEZE* PoljeObaveza = NULL; //9  //5
 		PoljeObaveza = zauzimanje(broj);
 		UnosPolje(PoljeObaveza, broj);
@@ -26,9 +26,9 @@ int izbornik() {
 		printf("\t4. Prikaz biljeska\n\n");
 		printf("\t5. Pronadji biljesku\n\n");
 		printf("\t6. Izbrisi sve biljeske\n\n");
-
-		printf("\t7. Izadji iz programa\n\n");
-		printf("\t8. sortiraj\n\n");
+		printf("\t7. sortiraj\n\n");
+		printf("\t8. Izadji iz programa\n\n");
+		
 		printf("\nOdabir opcije: ");
 		scanf("%d", &opcija);
 
@@ -55,17 +55,19 @@ int izbornik() {
 		case 6:
 			IzbrisiDatoteku();
 			break;
-
 		case 7:
+			
+			IspisiSortiraneBiljeske(PoljeObaveza, broj);
+
+			printf("\nBiljeske su sortirane po abecednom redu.\n");
+			break;
+
+		case 8:
 			system("cls");
 			printf("\tIzlazenje iz programa!\n\n\n");
 			free(PoljeObaveza); //14
 			exit(0);
-		case 8:
-			qsort(PoljeObaveza, broj, sizeof(OBAVEZE), SortirajBiljeske);
-			printf("\nBiljeske su sortirane po abecednom redu.\n");
-			break;
-
+		
 		default:
 			break;
 		}
@@ -302,7 +304,7 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 						printf("\nNe postoji obaveza pod tim brojem!");
 					}
 				} while (num > broj || num <= 0);
-				
+
 				for (i = num - 1; i < broj - 1; i++) {
 					p[i] = p[i + 1];
 				}
@@ -429,4 +431,11 @@ int SortirajBiljeske(const void* a, const void* b) {   //20
 	return strcmp(biljeskaA->obaveza, biljeskaB->obaveza);
 
 
+}
+
+void IspisiSortiraneBiljeske(OBAVEZE* niz, int n) {
+	qsort(niz, n, sizeof(OBAVEZE), SortirajBiljeske);
+	for (int i = 0; i < n; i++) {
+		printf("%d. %s\n", i + 1, niz[i].obaveza);
+	}
 }

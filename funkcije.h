@@ -22,7 +22,7 @@ void UnosPolje(OBAVEZE*, int);
 void IzbrisiObavezu(OBAVEZE*, int);
 void UrediObavezu(OBAVEZE*, int);
 void pronadji(OBAVEZE*, int);
-int SortirajBiljeske(const void* a, const void* b);
-
+int SortirajBiljeske(const void*, const void*);
+void IspisiSortiraneBiljeske(OBAVEZE*, int);
 
 #endif //FUNKCIJE_H
