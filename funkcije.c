@@ -15,7 +15,7 @@ int izbornik() {
 	do {
 
 		int broj = BrojacDat(); //4
-		int StatBr = StatDat();
+	
 		static OBAVEZE* PoljeObaveza = NULL; //9  //5
 		PoljeObaveza = zauzimanje(broj);
 		UnosPolje(PoljeObaveza, broj);
@@ -96,15 +96,6 @@ void stvori_datoteku() { //11
 	}
 	fclose(mapa2); //16
 
-	FILE* mapa3 = NULL;
-	mapa3 = fopen("statistika.txt", "a");
-
-
-	if (mapa3 == NULL) {
-		perror("Problem: "); //19
-		exit(EXIT_FAILURE);
-	}
-	fclose(mapa3);
 }
 
 
@@ -120,21 +111,6 @@ int BrojacDat() {
 
 	fscanf(Brf, "%d", &br);
 	fclose(Brf); //16
-	return br;
-}
-
-int StatDat() {
-	int br = 0;
-	FILE* Brf = NULL;
-
-	Brf = fopen("statistika.txt", "r+");
-	if (Brf == NULL) {
-		perror("Problem kod otvaranja datoteke za statistiku"); //19
-	}
-
-
-	fscanf(Brf, "%d", &br);
-	fclose(Brf);
 	return br;
 }
 
@@ -240,12 +216,6 @@ void IzbrisiDatoteku() {
 		fprintf(x, "%d", 0);
 		fclose(x);
 
-		FILE* y = NULL;
-		y = fopen("statistika.txt", "w");
-		if (y == NULL) {
-			perror("Brisanje statistike");
-		}
-		fclose(y);
 	}
 	system("cls");
 }
@@ -332,25 +302,7 @@ void IzbrisiObavezu(OBAVEZE* p, int broj) {
 						printf("\nNe postoji obaveza pod tim brojem!");
 					}
 				} while (num > broj || num <= 0);
-				/*
-								char zaStat;
-								int noviBrojac = StatDat();
-								printf("\nJeste li odradili vasu obavezu? y/n: ");
-								scanf(" %c", &zaStat);
-								if (zaStat == 'y' || zaStat == 'Y') {
-									FILE* stat = NULL;
-									stat = fopen("statistika.txt", "r+");
-									if (stat == NULL) {
-										perror("Problem kod statistike datoteke");
-									}
-									noviBrojac++;
-									rewind(stat);
-									fprintf(stat, "%d", noviBrojac);
-									fclose(stat);
-								}
-								printf("\n");
-				*/
-
+				
 				for (i = num - 1; i < broj - 1; i++) {
 					p[i] = p[i + 1];
 				}
@@ -450,19 +402,6 @@ void UrediObavezu(OBAVEZE* p, int broj) {
 }
 
 
-void statistika(int stat, int broj) {
-	system("cls");
-	if (broj == 0) {
-		printf("\nSve obaveze su gotove\n");
-	}
-	else {
-		broj += stat;
-		printf("\nOd ukupno %d obaveza odradili ste %d obaveza, odnosno %d%%\n\n", broj, stat, (stat * 100) / broj);
-	}
-	system("pause");
-	system("cls");
-}
-
 
 void pronadji(OBAVEZE* p, int broj) {
 	system("cls");
@@ -482,45 +421,11 @@ void pronadji(OBAVEZE* p, int broj) {
 	system("pause");
 	system("cls");
 }
-/*
-void sortirajBiljeske(OBAVEZE* p, int broj) {
-	int i, j;
-	OBAVEZE temp;
 
-	for (i = 0; i < broj - 1; i++) {
-		for (j = 0; j < broj - i - 1; j++) {
-			if (strcmp((p + j)->obaveza, (p + j + 1)->obaveza) > 0) {
-				// Zamijeni mjesta
-				temp = *(p + j);
-				*(p + j) = *(p + j + 1);
-				*(p + j + 1) = temp;
-			}
-		}
-	}
-}*/
-
-/*
-void sortirajBiljeske(OBAVEZE* p, int broj) {
-	if (broj == 0) {
-		printf("Nema unesenih biljeski za sortiranje.\n");
-		return;
-	}
-
-	qsort(p, broj, sizeof(OBAVEZE), compareObaveze);
-
-	printf("Biljeske su uspjesno sortirane po abecednom redu.\n");
-}
-
-int compareObaveze(const void* a, const void* b) {
-	OBAVEZE* obavezaA = (OBAVEZE*)a;
-	OBAVEZE* obavezaB = (OBAVEZE*)b;
-
-	return strcmp(obavezaA->obaveza, obavezaB->obaveza);
-}
-*/
 int SortirajBiljeske(const void* a, const void* b) {
 	const OBAVEZE* biljeskaA = (const OBAVEZE*)a;
 	const OBAVEZE* biljeskaB = (const OBAVEZE*)b;
 
 	return strcmp(biljeskaA->obaveza, biljeskaB->obaveza);
+
 }

@@ -14,7 +14,6 @@ void naslov();
 int izbornik();
 void stvori_datoteku();
 int BrojacDat();
-//int StatDat();
 void dodaj();
 void prikaz();
 void IzbrisiDatoteku();
@@ -22,10 +21,7 @@ OBAVEZE* zauzimanje(int);
 void UnosPolje(OBAVEZE*, int);
 void IzbrisiObavezu(OBAVEZE*, int);
 void UrediObavezu(OBAVEZE*, int);
-//void statistika(int, int);
 void pronadji(OBAVEZE*, int);
-//void sortirajBiljeske(OBAVEZE*, int);
-//int compareObaveze(const void* a, const void* b);
 int SortirajBiljeske(const void* a, const void* b);
 
 
