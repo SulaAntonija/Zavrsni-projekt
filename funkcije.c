@@ -62,7 +62,7 @@ int izbornik() {
 			free(PoljeObaveza); //14
 			exit(0);
 		case 8:
-			qsort(PoljeObaveza, broj, sizeof(OBAVEZE), UsporediBiljeske);
+			qsort(PoljeObaveza, broj, sizeof(OBAVEZE), SortirajBiljeske);
 			printf("\nBiljeske su sortirane po abecednom redu.\n");
 			break;
 
@@ -219,10 +219,10 @@ void IzbrisiDatoteku() {
 	do {
 		printf("\nJeste li sigurni da zelite izbrisati postojecu listu, te stvoriti novu? y/n: ");
 		scanf(" %c", &YesNo);
-	} while (YesNo != 'no' && YesNo != 'No' && YesNo != 'yes' && YesNo != 'Yes');
+	} while (YesNo != 'n' && YesNo != 'N' && YesNo != 'y' && YesNo != 'Y');
 
 
-	if (YesNo == 'yes' || YesNo == 'Yes') {
+	if (YesNo == 'y' || YesNo == 'Y') {
 		FILE* fp = NULL;
 		fp = fopen(datoteka, "w");
 
@@ -249,6 +249,7 @@ void IzbrisiDatoteku() {
 	}
 	system("cls");
 }
+
 
 
 
@@ -517,7 +518,7 @@ int compareObaveze(const void* a, const void* b) {
 	return strcmp(obavezaA->obaveza, obavezaB->obaveza);
 }
 */
-int UsporediBiljeske(const void* a, const void* b) {
+int SortirajBiljeske(const void* a, const void* b) {
 	const OBAVEZE* biljeskaA = (const OBAVEZE*)a;
 	const OBAVEZE* biljeskaB = (const OBAVEZE*)b;
 

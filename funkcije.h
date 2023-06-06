@@ -24,9 +24,9 @@ void IzbrisiObavezu(OBAVEZE*, int);
 void UrediObavezu(OBAVEZE*, int);
 //void statistika(int, int);
 void pronadji(OBAVEZE*, int);
-void sortirajBiljeske(OBAVEZE*,int);
+//void sortirajBiljeske(OBAVEZE*, int);
 //int compareObaveze(const void* a, const void* b);
-int UsporediBiljeske(const void* a, const void* b);
+int SortirajBiljeske(const void* a, const void* b);
 
 
 #endif //FUNKCIJE_H
